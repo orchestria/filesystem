@@ -1,0 +1,108 @@
+agents:
+  - name: Librarian
+    description: The librarian is an expert agent that manages the file system
+    model: llama3.1
+    provider: ollama
+    system_prompt: |-
+      You have the following Tools available
+      {% for tool in tools %}
+      {{ loop.index }}. {{ tool.name }}: {{ tool.description }}
+      Inputs schema: {{ tool.inputs_schema }}
+      {% endfor %}
+
+      If you choose to call a tool ONLY reply in the following format with no prefix or suffix:
+
+      example_tool_name[{{\"example_name\": \"example_value\"}}]
+
+      Reminder:
+      - Function calls MUST follow the specified format, start with the tool name and end with ]
+      - Required parameters MUST be specified
+      - Only call one function at a time
+      - Put the entire function call reply on one line
+      - If there is no function call available, answer the question like normal with your current knowledge and do not tell the user about function calls
+    supported_tools: ["Copy", "Move", "List", "Remove"]
+tools:
+  - name: Copy
+    description: Copies a local file from source to target path
+    language: python
+    entrypoint: copy_file.py
+    inputs_schema:
+      type: object
+      properties:
+        source:
+          description: Path of source file to copy
+          type: string
+        target:
+          description: Destination path
+          type: string
+      required:
+        - source
+        - target
+    outputs_schema:
+      description: Operation status
+      type: object
+      properties:
+        status:
+          description: Status
+          type: string
+  - name: Move
+    description: Move a file from source to target
+    language: python
+    entrypoint: move_file.py
+    inputs_schema:
+      type: object
+      properties:
+        source:
+          description: Path of source file to copy
+          type: string
+        target:
+          description: Destination path
+          type: string
+      required:
+        - source
+        - target
+    outputs_schema:
+      description: Operation status
+      type: object
+      properties:
+        status:
+          description: Status
+          type: string
+  - name: List
+    description: List all contents of a folder
+    language: python
+    entrypoint: list_files.py
+    inputs_schema:
+      type: object
+      properties:
+        path:
+          description: Path to folder
+          type: string
+      required:
+        - path
+    outputs_schema:
+      description: List files contained in path
+      type: array
+      items:
+        type: string
+  - name: Remove
+    description: Remove files
+    language: python
+    entrypoint: remove_files.py
+    inputs_schema:
+      type: object
+      properties:
+        files:
+          description: File paths to delete
+          type: array
+          items:
+            type: string
+      required:
+        - path
+    outputs_schema:
+      description: Operation status
+      type: object
+      properties:
+        status:
+          description: Status
+          type: string
