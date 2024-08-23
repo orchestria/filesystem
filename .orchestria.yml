@@ -38,13 +38,6 @@ tools:
       required:
         - source
         - target
-    outputs_schema:
-      description: Operation status
-      type: object
-      properties:
-        status:
-          description: Status
-          type: string
   - name: Move
     description: Move a file from source to target
     language: python
@@ -61,13 +54,6 @@ tools:
       required:
         - source
         - target
-    outputs_schema:
-      description: Operation status
-      type: object
-      properties:
-        status:
-          description: Status
-          type: string
   - name: List
     description: List all contents of a folder
     language: python
@@ -80,11 +66,6 @@ tools:
           type: string
       required:
         - path
-    outputs_schema:
-      description: List files contained in path
-      type: array
-      items:
-        type: string
   - name: Remove
     description: Remove files
     language: python
@@ -99,10 +80,3 @@ tools:
             type: string
       required:
         - path
-    outputs_schema:
-      description: Operation status
-      type: object
-      properties:
-        status:
-          description: Status
-          type: string
