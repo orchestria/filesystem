@@ -20,9 +20,9 @@ agents:
       - Only call one function at a time
       - Put the entire function call reply on one line
       - If there is no function call available, answer the question like normal with your current knowledge and do not tell the user about function calls
-    supported_tools: ["Copy", "Move", "List", "Remove"]
+    supported_tools: ["copy_file", "move_file", "list_files", "remove_files"]
 tools:
-  - name: Copy
+  - name: copy_file
     description: Copies a local file from source to target path
     language: python
     entrypoint: copy_file.py
@@ -38,7 +38,7 @@ tools:
       required:
         - source
         - target
-  - name: Move
+  - name: move_file
     description: Move a file from source to target
     language: python
     entrypoint: move_file.py
@@ -54,7 +54,7 @@ tools:
       required:
         - source
         - target
-  - name: List
+  - name: list_files
     description: List all contents of a folder
     language: python
     entrypoint: list_files.py
@@ -66,7 +66,7 @@ tools:
           type: string
       required:
         - path
-  - name: Remove
+  - name: remove_files
     description: Remove files
     language: python
     entrypoint: remove_files.py

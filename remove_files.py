@@ -9,7 +9,7 @@ from pathlib import Path
 import rich.prompt
 
 
-def remove_files():
+def run():
     args = sys.argv[-1]
     data = json.loads(args)
     if "files" not in data:
@@ -35,4 +35,4 @@ def remove_files():
 
 
 if __name__ == "__main__":
-    remove_files()
+    run()

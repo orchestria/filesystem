@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 
 
-def list_files():
+def run():
     args = sys.argv[-1]
     data = json.loads(args)
     if "path" not in data:
@@ -20,4 +20,4 @@ def list_files():
 
 
 if __name__ == "__main__":
-    list_files()
+    run()

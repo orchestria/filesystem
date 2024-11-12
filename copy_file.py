@@ -6,7 +6,7 @@ import shutil
 import sys
 
 
-def copy_file():
+def run():
     args = sys.argv[-1]
     data = json.loads(args)
     if "source" not in data:
@@ -20,4 +20,4 @@ def copy_file():
 
 
 if __name__ == "__main__":
-    copy_file()
+    run()
