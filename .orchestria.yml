@@ -38,6 +38,18 @@ tools:
       required:
         - source
         - target
+  - name: create_directory
+    description: Creates a new directory and all parents directories
+    language: python
+    entrypoint: create_directory.py
+    inputs_schema:
+      type: object
+      properties:
+        path:
+          description: Directory path to create
+          type: string
+      required:
+        - path
   - name: move_file
     description: Move a file from source to target
     language: python
